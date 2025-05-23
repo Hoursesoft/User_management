@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { User, Plus, Edit, Trash2, Search, Mail, Calendar, UserCheck } from 'lucide-react';
+import {API_BASE_URL} from '../config/api';
 
-const API_BASE_URL = 'https://backend-de-proyecto-node-js-users.onrender.com';
+
 
 const UserManagement = () => {
   const [users, setUsers] = useState([]);
@@ -11,6 +12,8 @@ const UserManagement = () => {
   const [showModal, setShowModal] = useState(false);
   const [editingUser, setEditingUser] = useState(null);
   const [formData, setFormData] = useState({
+
+
     nombre: '',
     apellido: '',
     edad: '',
@@ -27,7 +30,7 @@ const UserManagement = () => {
     try {
       setLoading(true);
       setError('');
-      const response = await fetch(`${API_BASE_URL}/users`);
+      const response = await fetch(API_BASE_URL);
       if (!response.ok) throw new Error('Error al cargar usuarios');
       const data = await response.json();
       setUsers(data);
@@ -42,7 +45,7 @@ const UserManagement = () => {
   // Crear nuevo usuario
   const createUser = async (userData) => {
     try {
-      const response = await fetch(`${API_BASE_URL}/users`, {
+      const response = await fetch(API_BASE_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -63,7 +66,7 @@ const UserManagement = () => {
   // Actualizar usuario
   const updateUser = async (userData) => {
     try {
-      const response = await fetch(`${API_BASE_URL}/users`, {
+      const response = await fetch(API_BASE_URL, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -87,7 +90,7 @@ const UserManagement = () => {
     }
     
     try {
-      const response = await fetch(`${API_BASE_URL}/users`, {
+      const response = await fetch(API_BASE_URL, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
